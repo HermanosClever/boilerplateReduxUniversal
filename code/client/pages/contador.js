@@ -3,13 +3,13 @@ import styler      from 'react-styling'
 import { connect } from 'react-redux'
 import { bindActionCreators as bind_action_creators } from 'redux'
 
-import { get as get_counter, add as add_counter, remove as substract_counter, dismiss_adding_error } from '../actions/counter'
+import { get as get_users, add as add_user, remove as delete_user, dismiss_adding_error } from '../actions/counter'
 import Button from '../components/button'
 
 import { title }   from 'react-isomorphic-render'
 import { preload } from 'react-isomorphic-render/redux'
 
-@preload((dispatch, get_state) => dispatch(get_counter()))
+@preload((dispatch, get_state) => dispatch(get_users()))
 @connect
 (
 	store => 
@@ -21,21 +21,21 @@ import { preload } from 'react-isomorphic-render/redux'
 		loading_error : store.users.loading_error,
 		adding_error  : store.users.adding_error
 	}),
-	dispatch => bind_action_creators({ get_counter, add_counter, substract_counter, dismiss_adding_error }, dispatch)
+	dispatch => bind_action_creators({ get_users, add_user, delete_user, dismiss_adding_error }, dispatch)
 )
 export default class Page extends Component
 {
 	static propTypes =
 	{
-		get_counter         : PropTypes.func.isRequired,
-		add_counter         : PropTypes.func.isRequired,
-		substract_counter   : PropTypes.func.isRequired,
-		counter               : PropTypes.number.isRequired,
-		loading             : PropTypes.bool,
-		loaded              : PropTypes.bool,
-		stale               : PropTypes.bool,
-		loading_error       : PropTypes.object,
-		adding_error        : PropTypes.object
+		get_users     : PropTypes.func.isRequired,
+		add_user      : PropTypes.func.isRequired,
+		delete_user   : PropTypes.func.isRequired,
+		users         : PropTypes.array.isRequired,
+		loading       : PropTypes.bool,
+		loaded        : PropTypes.bool,
+		stale         : PropTypes.bool,
+		loading_error : PropTypes.object,
+		adding_error  : PropTypes.object
 	}
 
 	static contextTypes =
@@ -48,9 +48,8 @@ export default class Page extends Component
 		super(props)
 
 		this.refresh     = this.refresh.bind(this)
-		this.add_counter    = this.add_counter.bind(this)
-		this.substract_counter = this.substract_counter.bind(this)
-	
+		this.add_user    = this.add_user.bind(this)
+		this.delete_user = this.delete_user.bind(this)
 	}
 
 	componentWillReceiveProps(next_props)
@@ -62,7 +61,7 @@ export default class Page extends Component
 
 		if (next_props.adding_error)
 		{
-			alert('fallo al añadir')
+			alert('Failed to add the user')
 
 			this.props.dismiss_adding_error()
 		}
@@ -70,18 +69,17 @@ export default class Page extends Component
 
 	render()
 	{
-		const { error, loaded, counter } = this.props
+		const { error, loaded, users } = this.props
 
 		const markup = 
 		(
-			<section style={style.container} className="table">
-				{title("Contador REST API")}
+			<section>
+				{title("Simple REST API example")}
 
+				<div style={style.container}>
+					<p>This is an example of REST API usage with no database persistence</p>
 
-				<div  className="table-cell">
-					<h1>Contador Rest API sin base de datos</h1>
-
-					{this.render_counter(error, loaded, counter)}
+					{this.render_users(error, loaded, users)}
 				</div>
 			</section>
 		)
@@ -89,18 +87,18 @@ export default class Page extends Component
 		return markup
 	}
 
-	render_counter(error, loaded, counter)
+	render_users(error, loaded, users)
 	{
 		if (error)
 		{
 			const markup = 
 			(
-				<div>
-					{'Fallo al refrescar'}
+				<div style={style.users}>
+					{'Failed to load the list of users'}
 
 					{/* error.stack || error */}
 
-					<button onClick={this.refresh}>Intentar de nuevo</button>
+					<button onClick={this.refresh} style={style.users.refresh}>Try again</button>
 				</div>
 			)
 
@@ -109,19 +107,19 @@ export default class Page extends Component
 
 		if (!loaded)
 		{
-			return <div>Cargando...</div>
+			return <div style={style.users}>Loading users</div>
 		}
-		debugger;
-		if (!!counter)
+
+		if (users.is_empty())
 		{
 			const markup = 
 			(
-				<div>
+				<div style={style.users}>
 					No users
 
-					<button onClick={this.add_counter} >Sumar</button>
+					<button onClick={this.add_user} style={style.users.add}>Add user</button>
 
-					<button onClick={this.refresh} >Actualizar</button>
+					<button onClick={this.refresh} style={style.users.refresh}>Refresh</button>
 				</div>
 			)
 
@@ -130,22 +128,30 @@ export default class Page extends Component
 
 		const markup = 
 		(
-			<div>
-				<span>Users</span>
+			<div style={style.users}>
+				<span style={style.users.list.title}>Users</span>
 
-				<button onClick={this.add_counter}>Sumar</button>
+				<button onClick={this.add_user} style={style.users.add}>Add user</button>
 				
-				<button onClick={this.refresh}>Actualizar</button>
+				<button onClick={this.refresh} style={style.users.refresh}>Refresh</button>
 
 				<div>
-					<span>{counter}</span>
+					<ul style={style.users.list}>
+						{users.map(user =>
+						{
+							return <li key={user.id}>
+								<span style={style.user.id}>{user.id}</span>
 
-					<Button
-						busy={this.props.deleting}
-						on_click={event => this.substract_counter}
-						text="Restar"/>
-						
-				
+								<span style={style.user.name}>{user.name}</span>
+
+								<Button
+									busy={this.props.deleting}
+									on_click={event => this.delete_user(user.id)}
+									text="delete user"
+									style={style.users.delete}/>
+							</li>
+						})}
+					</ul>
 				</div>
 			</div>
 		)
@@ -155,10 +161,10 @@ export default class Page extends Component
 
 	refresh()
 	{
-		this.props.get_counter()
+		this.props.get_users()
 	}
 
-	add_counter()
+	add_user()
 	{
 		const name = prompt(`Enter user's name`)
 		
@@ -167,21 +173,43 @@ export default class Page extends Component
 			return
 		}
 
-		this.props.add_counter({ name: name })
+		this.props.add_user({ name: name })
 	}
 
-	substract_counter(id)
+	delete_user(id)
 	{
-		this.props.substract_counter(id)
+		this.props.delete_user(id)
 	}
 }
 
 const style = styler
 `
 	container
-		position:absolute;
-		top:0;
-		left:0;
-		height:100vh;
 
+	users
+		margin-top : 2em
+
+		list
+			display         : inline-block
+			list-style-type : none
+			padding-left    : 1em
+
+			title
+				font-weight : bold
+
+		refresh
+			margin-left : 1em
+
+		add
+			margin-left : 1em
+
+		delete
+			margin-left : 1em
+
+	user
+		id
+			color        : #9f9f9f
+
+		name
+			margin-left : 0.3em
 `
