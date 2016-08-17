@@ -3,7 +3,7 @@ import styler      from 'react-styling'
 import { connect } from 'react-redux'
 import { bindActionCreators as bind_action_creators } from 'redux'
 
-import { get as get_users, add as add_user, remove as delete_user, dismiss_adding_error } from '../actions/counter'
+import { get as get_users, add as add_user, remove as delete_user, dismiss_adding_error } from '../actions/users'
 import Button from '../components/button'
 
 import { title }   from 'react-isomorphic-render'
@@ -73,11 +73,11 @@ export default class Page extends Component
 
 		const markup = 
 		(
-			<section>
-				{title("Simple REST API example")}
+			<section className="table" style={style.container}>
+				{title("Simple REST API ")}
 
-				<div style={style.container}>
-					<p>This is an example of REST API usage with no database persistence</p>
+				<div style={style.container} className="table-cell">
+					<h1>Uso de API sin Base de Datos</h1>
 
 					{this.render_users(error, loaded, users)}
 				</div>
@@ -185,7 +185,8 @@ export default class Page extends Component
 const style = styler
 `
 	container
-
+		height:100vh
+		text-align: center;
 	users
 		margin-top : 2em
 

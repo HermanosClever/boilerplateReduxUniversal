@@ -18,7 +18,6 @@ export default class Button extends Component
 		const markup = 
 		(
 			<div style={merge(style.container, this.props.style)}>
-		
 				<span className="spinner" style={ busy ? style.spinner.show : style.spinner.hide }></span>
 				<button disabled={busy} onClick={on_click} style={ busy ? style.button.hide : style.button.show }>{text}</button>
 			</div>

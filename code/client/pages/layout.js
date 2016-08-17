@@ -36,13 +36,14 @@ export default class Layout extends Component
 			{ property: 'og:locale',      content: 'es-ES' }
 		]
 
+
 		const menu_items =
 		[{
 			name: 'Home',
 			link: '/'
 		}, {
-			name: 'Contador',
-			link: '/contador'
+			name: 'Users',
+			link: '/users'
 		}]
 
 		const markup = 

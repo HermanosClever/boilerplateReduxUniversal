@@ -45,5 +45,4 @@ const style = styler
 				display:inline-block;
 				font-size: 15px;
 				line-height: 20px;
-
 `

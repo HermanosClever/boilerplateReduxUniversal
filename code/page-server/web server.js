@@ -31,11 +31,11 @@ export default function(parameters)
 			// (this is not necessary)
 			if (_development_)
 			{
-				delete require.cache[require.resolve('../../assets/images/icon/favicon.png')]
+				delete require.cache[require.resolve('../../assets/images/icon/cat_64x64.png')]
 			}
 
 			// Add "favicon"
-			result.icon = require('../../assets/images/icon/favicon.png')
+			result.icon = require('../../assets/images/icon/cat_64x64.png')
 
 			// Return assets
 			return result
