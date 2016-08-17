@@ -8,18 +8,19 @@ export default class Page extends Component
 {
 	render()
 	{
-		const husky = require('../../../assets/images/husky.jpg')
+		const logo = require('../../../assets/images/logo.png')
 
 		const markup = 
 		(
-			<section className="content">
-				{title("Home")}
+			<section className="table" style={style.container}>
+				{title("Hermanos Clever")}
+				<div className="table-cell">
+					<h1 style={style.header}>
+						BoilerPlate Redux
+					</h1>
 
-				<h1 style={style.header}>
-					Husky
-				</h1>
-
-				<img src={husky} style={style.image}/>
+					<img src={logo} style={style.image}/>
+				</div>
 			</section>
 		)
 
@@ -29,18 +30,20 @@ export default class Page extends Component
 
 const style = styler
 `
+	container
+		position:absolute;
+		top:0;
+		left:0;
+		height:100vh;
+
 	header
-		text-align: center
+		text-align: center;
+		font-weight:bold;
 
 	image
-		display: block
+		display: block;
+		margin-left  : auto;
+		margin-right : auto;
 
-		margin-left  : auto
-		margin-right : auto
 
-		border-width : 1px
-		border-style : solid
-		border-color : #7f7f7f
-
-		border-radius : 0.5em
 `

@@ -27,7 +27,7 @@ require('babel-register')
 	ignore: function(filename)
 	{
 		const relative_path = path.relative(global.Root_folder, filename)
-		let folder = path.dirname(relative_path)
+		var folder = path.dirname(relative_path)
 
 		// If it's a `node_modules` folder, ignore it
 		if (folder.split(path.sep).indexOf('node_modules') >= 0)

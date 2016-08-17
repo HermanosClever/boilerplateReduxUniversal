@@ -24,26 +24,26 @@ export default class Menu extends Component
 	{
 		if (item.link === '/')
 		{
-			return <IndexLink to={item.link} style={style.menu.item.link} activeClassName="menu-item-selected" className="menu-item">{item.name}</IndexLink>
+			return <IndexLink to={item.link} style={style.menu.item.link} activeClassName="selected" className="menu-item">{item.name}</IndexLink>
 		}
 
-		return <Link to={item.link} style={style.menu.item.link} activeClassName="menu-item-selected" className="menu-item">{item.name}</Link>
+		return <Link to={item.link} style={style.menu.item.link} activeClassName="selected" className="menu-item">{item.name}</Link>
 	}
 }
 
 const style = styler
 `
 	menu
-		margin-top    : 0
-		margin-bottom : 0
-
-		list-style-type : none
-		padding         : 0
-
+		float:right;
 		item
-			display: inline-block
+
+			list-style:none;
+			display:inline-block;
+			padding: 0 20px 20px;
 
 			link
-				display         : inline-block
-				text-decoration : none
+				display:inline-block;
+				font-size: 15px;
+				line-height: 20px;
+
 `

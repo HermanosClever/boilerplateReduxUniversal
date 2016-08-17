@@ -12,6 +12,7 @@ export default function(api)
 {
 	api.get('/example/users', function()
 	{
+		
 		return Array.from(users.keys())
 	})
 

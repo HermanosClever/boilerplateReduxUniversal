@@ -16,10 +16,11 @@ export default class Layout extends Component
 
 	render()
 	{
+		const logo = require('../../../assets/images/logo.png')
 		// Html document metadata
 
-		const title = 'WebApp'
-		const description = 'A generic web application boilerplate'
+		const title = 'Index Hermanos Clever'
+		const description = 'Bboilerplate de Redux'
 
 		const meta =
 		[
@@ -30,9 +31,9 @@ export default class Layout extends Component
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, user-scalable=no' },
 
 			// <meta property="..." content="..."/>
-			{ property: 'og:title',       content: 'International Bodybuilders Club' },
-			{ property: 'og:description', content: 'Do some push ups' },
-			{ property: 'og:locale',      content: 'ru-RU' }
+			{ property: 'og:title',       content: 'Boilerplate de React Redux' },
+			{ property: 'og:description', content: 'Live Reload, Webpack, React, Redux' },
+			{ property: 'og:locale',      content: 'es-ES' }
 		]
 
 		const menu_items =
@@ -40,8 +41,8 @@ export default class Layout extends Component
 			name: 'Home',
 			link: '/'
 		}, {
-			name: 'Users',
-			link: '/users'
+			name: 'Contador',
+			link: '/contador'
 		}]
 
 		const markup = 
@@ -50,10 +51,11 @@ export default class Layout extends Component
 				{head(title, meta)}
 
 				{/* header */}
-				<header>
+				<header className="container" style={style.header}>
 					{/* Navigation */}
 					{/*<nav>*/}
 						{/* main menu */}
+						<a style={style.img} href="https://hermanosclever.com/" target="_blank"><img src={logo} /></a>
 						<Menu items={menu_items}/>
 					{/*</nav>*/}
 				</header>
@@ -67,3 +69,17 @@ export default class Layout extends Component
 		return markup
 	}
 }
+
+const style = styler
+`
+	header
+		position:relative;
+		z-index:9
+		padding-top: 35px
+
+	img
+		float:left
+
+
+
+`

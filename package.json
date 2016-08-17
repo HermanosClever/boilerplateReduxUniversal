@@ -1,12 +1,11 @@
 {
-  "name": "webpack-react-redux-isomorphic-render-example",
+  "name": "BoilerplateReduxHC",
   "version": "1.0.0",
-  "description": "an alternative to using webpack-isomorphic-tools",
+  "description": "Boilerplate Redux",
   "repository": {
     "type": "git",
-    "url": "https://github.com/halt-hammerzeit/webpack-react-redux-isomorphic-render-example.git"
+    "url": "https://github.com/HermanosClever/boilerplateReduxUniversal.git"
   },
-  "homepage": "https://github.com/halt-hammerzeit/webpack-react-redux-isomorphic-render-example",
   "dependencies": {
     "autoprefixer": "^6.3.7",
     "babel-cli": "^6.6.5",
@@ -65,6 +64,7 @@
     "webpack-hot-middleware": "^2.5.1"
   },
   "scripts": {
+    "start": "npm-run-all development-prepare-server-build development",
     "dev": "npm-run-all development-prepare-server-build development",
     "development": "npm-run-all --parallel development-build-client development-build-server development-server",
     "development-prepare-server-build": "universal-webpack --settings ./webpack/universal-webpack-settings.js prepare",
@@ -85,7 +85,7 @@
     "production-web-server": "node ./code/web-server/entry.js --production",
     "production-server": "npm-run-all --parallel production-api-server production-page-server production-web-server"
   },
-  "author": "Halt Hammerzeit",
+  "author": "HermanosClever",
   "license": "MIT",
   "engines": {
     "node": "4.1.1"

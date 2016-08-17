@@ -1,0 +1,3 @@
+export const ADD_COUNTER = 'ADD_COUNTER';
+export const REFRESH = 'STAR_FRIEND';
+export const SUBSTRACT_COUNTER = 'SUBSTRACT_COUNTER';
