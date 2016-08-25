@@ -17,20 +17,18 @@ const style = styler`
     display: block;
     text-align: center;
 `;
-// NOTE: http://rackt.github.io/redux/docs/recipes/WritingTests.html
+
 export class Counter extends Component {
 
   componentDidMount() {
-    console.log(8);
-    console.log(89);
+    
   }
   render() {
     return (
       <div>
-        <h2> El valor de tu contador es: 
+        <h2> El resultado es:
           <b style={style.b}>{this.props.counter}</b>
         </h2>
-
         <p style={style.p}>
           <button  type="button" onClick={this.props.decrement}>Restar</button>
           <button  type="button" onClick={this.props.increment}>Sumar</button>

@@ -36,7 +36,7 @@ export default class Page extends Component {
 							BoilerPlate
 						</h1>
 						<h2 style={style.marginBottom}>
-							Redux, React Universal, Webpack, Control de metadatado, Sass, Styles inline, Live Reload
+							Redux, React Universal, Webpack, Validador de código, Control de metadatado, Sass, Styles inline, Live Reload
 						</h2>
 						<img src="static/images/logo.png" style={style.image}/>
 					</div>
