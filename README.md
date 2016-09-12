@@ -3,7 +3,7 @@
 
 ##About
 
-This is a starter boilerplate app uses this technologies:
+This is a starter boilerplate app that uses these technologies:
 
     express,
     history,
